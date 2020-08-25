@@ -1,0 +1,30 @@
+---
+- hosts: es
+  remote_user: root
+  tasks:
+    - name: yum source deployment
+      copy: 
+        src: local.repo
+        dest: /etc/yum.repos.d/local.repo 
+    - name: install java-1.8.0-openjdk elasticsearch
+      yum: 
+        name: java-1.8.0-openjdk,elasticsearch
+        state: installed
+    - name: copy elasticsearch.yml
+      template: 
+        src: elasticsearch.yml
+        dest: /etc/elasticsearch/elasticsearch.yml
+        owner: root
+        group: root
+        mode: 0644
+      notify: reload_es
+      tags: esconf
+    - service: 
+        name: elasticsearch
+        enabled: yes
+  handlers: 
+    - name: reload_es
+      service:
+        name: elasticsearch
+        state: restarted
+
