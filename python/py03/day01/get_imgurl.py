@@ -40,7 +40,7 @@ if __name__ == '__main__':
         except (error.HTTPError,error.URLError):
             print('%s failed' % url)
             with open(os.path.join(folddest,'img_failed.txt'),'a+') as fobj:
-                fobj.write(url)
+                fobj.write('%s\n' % url)
 
 
 

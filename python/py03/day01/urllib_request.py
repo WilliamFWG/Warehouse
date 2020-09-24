@@ -5,7 +5,7 @@ import sys
 
 def graburl(url,dest,encoding=None):
     html=request.urlopen(url)
-    if os.path.isfile(dest):
+    if not os.path.isfile(dest):
         os.mknod(dest)
     with open(dest, 'ab', encoding=encoding) as fobj:
         while 1:
