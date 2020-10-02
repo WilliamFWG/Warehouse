@@ -1,0 +1,27 @@
+---
+- hosts: webservers
+  remote_user: root
+  tasks:
+    - name: install the latest version of Apache
+      yum:
+        name: httpd
+        state: latest
+    - lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^Listen '
+        insertafter: '^#Listen '
+        line: 'Listen 8080'
+    - name: example copying file with owner and permissions
+      copy:
+        src: /root/myansible/index.html
+        dest: /var/www/html/
+        owner: root
+        group: root
+        mode: 0644
+    - name: Start service httpd, if not started
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+      tags: start_httpd
+

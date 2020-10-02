@@ -1,0 +1,22 @@
+---
+- hosts : webservers
+  remote_user: root
+  tasks:
+    - name: add group user
+      shell: groupadd user
+      ignore_errors: True
+    - name: Add the user "{{item.username}}"
+      user:
+        name: "{{item.username}}"
+        group: "{{item.group}}"
+        password: "{{item.password|password_hash('sha512')}}"
+      with_items: 
+        -
+          username: nb
+          group: user
+          password: "123456"
+        -
+          username: dd
+          group: user
+          password: book
+

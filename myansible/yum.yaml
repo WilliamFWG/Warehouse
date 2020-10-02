@@ -1,0 +1,14 @@
+---
+- name: configure yum repo
+  hosts: all
+  tasks: 
+    - name: make yum client config
+      yum_repository:
+        name: test_yum
+        description: Centos7.4 YUM repo
+        file: test_repos
+        baseurl: http://apt.sw.be/redhat/el7/en/$basearch/rpmforge
+        mirrorlist: http://mirrorlist.repoforge.org/el7/mirrors-rpmforge
+        enabled: no
+        gpgcheck: no
+

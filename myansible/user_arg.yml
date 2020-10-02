@@ -1,0 +1,9 @@
+---
+-
+  username: nb
+  group: user
+  password: "123456"
+-
+  username: dd
+  group: user
+  password: book

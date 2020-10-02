@@ -1,0 +1,13 @@
+---
+- hosts : webservers
+  remote_user: root
+  vars: 
+    username: lisi
+  tasks: 
+    - name: Add the user "{{username}}"
+      user:
+        name: '{{username}}'
+        group: users
+    - name: change password for '{{username}}'
+      shell: echo '123456' | passwd --stdin '{{username}}'
+

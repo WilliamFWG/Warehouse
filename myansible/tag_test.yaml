@@ -1,0 +1,27 @@
+---
+- hosts: webservers
+  remote_user: root
+  tasks:
+    - copy:
+        src: httpd.conf
+        dest: /etc/httpd/conf/httpd.conf
+        owner: root
+        group: root
+        mode: 0644
+      tags: change_httpd_conf
+      notify:
+        - restart httpd
+    - copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: apache
+        group: apache
+        mode: 0644
+      tags: change_index_html
+  handlers:     
+    - name: restart httpd
+      service: 
+        name: httpd
+        state: restarted
+        enabled: yes
+      tags: httpd_restart
