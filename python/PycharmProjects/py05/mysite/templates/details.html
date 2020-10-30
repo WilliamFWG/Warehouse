@@ -1,0 +1,27 @@
+{% extends 'basic.html' %}
+{% block title %}
+    Details
+{% endblock %}
+{% block content %}
+    <h1 class="text-center text-warning">
+        Question Details of {{ questions.id }}
+    </h1>
+    <h2>
+        {{ questions.question_text }}
+    </h2>
+    <form action="{% url 'votes' questions.id %}" method="post">
+        {% csrf_token %}
+        {% for choice in questions.choice_set.all %}
+            <div class="radio">
+                <label for="">
+                    <input type="radio" name="choice_id" value="{{ choice.id }}">
+                    {{ choice.choice_text }}
+                </label>
+            </div>
+        {% endfor %}
+            <div class="form-group">
+                <input type="submit" class="btn-primary" value="Submit">
+            </div>
+    </form>
+{% endblock %}
+

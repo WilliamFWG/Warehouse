@@ -1,0 +1,23 @@
+{% extends 'basic.html' %}
+{% block title %}
+    Result
+{% endblock %}
+{% block content %}
+    <div class="content h4">
+        <h1 class="text-warning text-center ">
+            Result of {{ questions.id }}
+            <hr>
+            {{ questions.question_text }}
+        </h1>
+        <table class="table table-hover table-striped">
+            {% for choice in questions.choice_set.all %}
+            <tr>
+                <td>{{ choice.choice_text }}</td>
+                <td>{{ choice.votes }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'basic.html' %}
+{% block title %}
+    Polls Index
+{% endblock %}
+{% block content %}
+    <div class="content">
+        <h1 class="text-center text-warning">Polls Index</h1>
+        <ol class="h4" style="margin: 60px 60px">
+            {% for question in questions %}
+                <li>
+                    <a href="{% url 'details' question.id %}" target="_blank">{{ question.question_text }}</a>
+
+                    {{ question.pub_date }}
+                </li>
+
+            {% endfor %}
+        </ol>
+
+    </div>
+{% endblock %}
